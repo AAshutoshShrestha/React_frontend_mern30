@@ -1,21 +1,62 @@
 // import { BaseSyntheticEvent, useState } from "react";
 import { BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
-import { TextFielWithLabel } from "../../../components/common/input/index.component";
+import { InputLabel, RoleSelector, TextInputComponent } from "../../../components/common/input/index.component";
 
-// import * as Yup form "yup";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { INPUT_TYPE } from "../../../components/common/input/input.contract";
+
 
 const RegisterPage = () => {
-	// const RegisterDTO 
+	const RegisterDTO = Yup.object({
+		name: Yup.string().matches(/^[a-zA-Z ]+$/, "Name is compulsary")
+			.min(2)
+			.max(50)
+			.required(),
 
-	const { register, handleSubmit, setValue, formState: { errors } } = useForm()
+		email: Yup.string()
+			.email()
+			.required(),
 
-	const submitEvent = (data: any) => {
-		// todo
+		password: Yup.string()
+			.matches(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,25}$/, "Password must contain one digit from 1 to 9, one lowercase letter, one uppercase letter, one special character, no space, and it must be 8-25 characters long.")
+			.min(8)
+			.max(25)
+			.required(),
+
+		confirmPassword: Yup.string()
+			.oneOf([Yup.ref('password')])
+			.required(),
+
+		address: Yup.string()
+			.nullable()
+			.optional(),
+
+		phone: Yup.string()
+			.matches(/^\+[1-9]{1}[0-9]{3,14}$/, "Invalid Phone Number")
+			.min(10)
+			.max(20)
+			.required(),
+
+		image: Yup.mixed(),
+
+		role: Yup.string()
+			.matches(/^(admin|seller|customer)/, "Role can be admin, seller or customer only")		//validate 
+			.required()
+	})
+
+	const { control, handleSubmit, setValue, formState: { errors } } = useForm({
+		resolver: yupResolver(RegisterDTO)
+	})
+
+	const submitEvent = (data: object) => {
+		// ToDo: API Call
 		console.log(data);
 
 	}
 
+	console.log(errors);
 
 	// const [data, setData] = useState({});
 
@@ -28,7 +69,6 @@ const RegisterPage = () => {
 	//     [name]: value,
 
 	//   })
-	console.log(errors);
 
 
 
@@ -105,73 +145,90 @@ const RegisterPage = () => {
 							</div>
 
 							<form onSubmit={handleSubmit(submitEvent)} className="mt-8 grid grid-cols-6 gap-6">
-								<div className="col-span-6">
-									<label htmlFor="name" className="block text-sm font-medium text-gray-700">
-										Full Name
-									</label>
-
-									<input
-										type="text"
-										id="name"
-
-										className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-									/>
-									<span className="mt-2 text-red-500 tetx-sm">{ }</span>
-									<TextFielWithLabel
-										fieldName="Full Name"
-
-										{...register("name", { required: true })}
-										msg={errors?.name ? "Name is required" : ""} />
-								</div>
-
-
 
 								<div className="col-span-6">
-									<label htmlFor="Email" className="block text-sm font-medium text-gray-700"> Email </label>
+									<InputLabel htmlFor="name" value="Full Name" />
 
-									<input
-										type="email"
-										id="Email"
-										{...register("email", { required: true })}
-										className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+									<TextInputComponent
+										name="name"
+										type={INPUT_TYPE.TEXT}
+										control={control}
+										defaultValue="Enter Your Full-Name"
+										msg={errors?.name ? "name is requires" : ""}
 									/>
 								</div>
 
-								<div className="col-span-6 sm:col-span-3">
-									<label htmlFor="Password" className="block text-sm font-medium text-gray-700"> Password </label>
+								<div className="col-span-6">
+									<InputLabel htmlFor="email" value="Email Address" />
 
-									<input
-										type="password"
-										id="Password"
-										{...register("Password", { required: true })}
-										className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+									<TextInputComponent
+										name="email"
+										type={INPUT_TYPE.EMAIL}
+										control={control}
+										defaultValue="Enter Valid Email"
+										msg={errors?.email ? "Email is requires" : ""}
+									/>
+								</div>
+
+
+								<div className="col-span-6 sm:col-span-3">
+									<InputLabel htmlFor="password" value="Password" />
+
+									<TextInputComponent
+										name="password"
+										type={INPUT_TYPE.PASSWORD}
+										control={control}
+										defaultValue="Create Password"
+										msg={errors?.password ? "password is requires" : ""}
 									/>
 
 
 								</div>
 
 								<div className="col-span-6 sm:col-span-3">
-									<label htmlFor="PasswordConfirmation" className="block text-sm font-medium text-gray-700">
-										Password Confirmation
-									</label>
+									<InputLabel htmlFor="confirm_password" value="Confirm Password" />
 
-									<input
-										type="password"
-										id="PasswordConfirmation"
-										{...register("password_confirmation", { required: true })}
-										className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+									<TextInputComponent
+										name="confirm_password"
+										type={INPUT_TYPE.PASSWORD}
+										defaultValue="Confirm your Password"
+										control={control}
 									/>
 								</div>
 								<div className="col-span-6 sm:col-span-3">
-									<label htmlFor="address" className="block text-sm font-medium text-gray-700">
-										Address
-									</label>
+									<InputLabel htmlFor="address" value="Address" />
 
-									<textarea
-										id="address"
-										{...register("address", { required: true })}
-										className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+									<TextInputComponent
+										name="address"
+										type={INPUT_TYPE.TEXT}
+										control={control}
+										defaultValue="Enter your address"
+										msg={errors?.address ? "Address is required" : ""}
 									/>
+									
+								</div>
+
+								<div className="col-span-6 sm:col-span-3">
+									<InputLabel htmlFor="phone" value="phone" />
+
+									<TextInputComponent
+										name="phone"
+										type={INPUT_TYPE.TEL}
+										control={control}
+										defaultValue="Enter Phone number"
+									/>
+									
+								</div>
+
+								<div className="col-span-6 sm:col-span-3">
+									<InputLabel htmlFor="role" value="Role" />
+
+									<RoleSelector
+										name="role"
+										control={control}
+										msg={errors?.role ? "Role is required" : ""}
+									/>
+									
 								</div>
 
 								<div className="max-w-sm">

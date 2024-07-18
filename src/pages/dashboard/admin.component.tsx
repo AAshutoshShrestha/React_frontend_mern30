@@ -1,12 +1,13 @@
-import { NavLink } from "react-router-dom"
+import { ApplicationNav } from "../../components/applicationNav.component";
+import { TableDashboardSample } from "../../components/Table/index.component";
 
-const AdminLayout = () => {
-  return (
-	<>
-		<NavLink to="https://play.tailwindcss.com/NjKsUQdpmA?size=1120x720">Sidebar code</NavLink>
-
-	</>
-  )
+const DashboardMain = () => {
+	return (
+		<>
+			<ApplicationNav/>
+			<TableDashboardSample/>
+		</>
+	)
 }
 
-export default AdminLayout
+export default DashboardMain;

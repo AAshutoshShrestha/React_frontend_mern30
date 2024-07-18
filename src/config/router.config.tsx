@@ -7,9 +7,10 @@ import NotFoundPage from "../pages/errorPage"
 import HomeLayout from "../pages/layout/homeLayout.page"
 import CategoryDetailPage from "../pages/categories/categoryDetail.page"
 import ProductDetailPage from "../pages/Products/productDetail.page"
-import AdminLayout from "../pages/dashboard/admin.component"
 
 import {RegisterPage,LoginPage} from "../pages/auth/index"
+import DashboardLayout from "../pages/layout/DashboardLayout.page"
+import DashboardMain from "../pages/dashboard/admin.component"
 
 
 export const RouterConfig = () => {
@@ -18,18 +19,18 @@ export const RouterConfig = () => {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<HomeLayout />}>
-						<Route index element={<Homepage />}></Route>
-						<Route path="products" element={<AllProductsPage />}></Route>
-						<Route path="categories" element={<CategoriesPage />}></Route>
-						<Route path="categories/:slug" element={<CategoryDetailPage />}></Route>
-						<Route path="product/:pid/:slug" element={<ProductDetailPage />}></Route>
-						<Route path="about-us" element={<AboutUsPage/>}></Route>
+						<Route index element={<Homepage />}/>
+						<Route path="products" element={<AllProductsPage />}/>
+						<Route path="categories" element={<CategoriesPage />}/>
+						<Route path="categories/:slug" element={<CategoryDetailPage />}/>
+						<Route path="product/:pid/:slug" element={<ProductDetailPage />}/>
+						<Route path="about-us" element={<AboutUsPage/>}/>
 					</Route>
 					<Route path="/sign-up" element={<RegisterPage/>}></Route>
 					<Route path="/sign-in" element={<LoginPage />}></Route>
 
-					<Route path="/dashboard" element={<AdminLayout/>}>
-						
+					<Route path="/dashboard" element={<DashboardLayout/>}>
+						<Route index element={<DashboardMain/>} />
 					</Route>
 					<Route path="*" element={<NotFoundPage/>}></Route>
 				</Routes>

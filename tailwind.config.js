@@ -4,15 +4,13 @@ export default {
 		"./index.html",
 		"./src/**/*.{js,ts,jsx,tsx}",
 		'node_modules/preline/dist/*.js',
+		
 	],
 	theme: {
 		extend: {},
 	},
 	plugins: [
 		// require('@tailwindcss/forms'),
-		(
-			'preline/plugin',
-			'tailwindcss/forms'
-		),
+		('preline/plugin'),
 	],
   }
