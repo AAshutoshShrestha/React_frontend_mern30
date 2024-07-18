@@ -1,0 +1,203 @@
+{
+	"products": [
+		{
+
+			"index": 0,
+			"product_name": "Polo Shirt in Pique",
+			"slug": "Polo-Shirt-in-Piqué",
+			"product_image": "https://i.pinimg.com/736x/5b/ee/a4/5beea4094a5c1b4eae4fbd688ed06b26.jpg",
+			"price": 79.99,
+			"category_id": 1,
+			"discount": 10
+		},
+		{
+			"index": 1,
+			"product_name": "Slim Fit Wool Trousers",
+			"slug": "Slim-Fit-Wool-Trousers",
+			"product_image": "https://i.pinimg.com/736x/e1/fe/bb/e1febbb675fa2f44a861a5707cdfb813.jpg",
+			"price": 189.95,
+			"category_id": 3,
+			"discount": 10
+		},
+		{
+			"index": 2,
+			"product_name": "Merino Wool Polo Sweater",
+			"slug": "Merino-Wool-Polo-Sweater",
+			"product_image": "https://i.pinimg.com/736x/64/45/dd/6445dd4cd966420c8ee2a448c769ab18.jpg",
+			"price": 159.00,
+			"category_id": 1,
+			"discount": 0
+		},
+		{
+			"index": 3,
+			"product_name": "Cashmere Sweater",
+			"slug": "Cashmere-Sweater",
+			"product_image": "https://i.pinimg.com/736x/cc/f7/71/ccf77120802fcde24e535fa58c10c612.jpg",
+			"price": 299.95,
+			"category_id": 2,
+			"discount": 0
+		},
+		{
+			"index": 4,
+			"product_name": "Oxford Button-Down Shirt",
+			"slug": "Oxford-Button-Down-Shirt",
+			"product_image": "https://i.pinimg.com/736x/5f/74/c1/5f74c109e829d512ddf474b96aef2a96.jpg",
+			"price": 89.00,
+			"category_id": 4,
+			"discount": 0
+		},
+		{
+			"index": 5,
+			"product_name": "Leather Derby Shoes",
+			"slug": "Leather-Derby-Shoes",
+			"product_image": "https://i.pinimg.com/736x/1e/20/37/1e2037235c88cbf8154dedb517747598.jpg",
+			"price": 199.50,
+			"category_id": 5,
+			"discount": 20
+		},
+		{
+			"index": 6,
+			"product_name": "Slim Fit Chinos",
+			"slug": "Slim-Fit-Chinos",
+			"product_image": "https://i.pinimg.com/736x/c8/6c/39/c86c392dd7cac76a02273f2b5ebf68ad.jpg",
+			"price": 129.50,
+			"category_id": 3,
+			"discount": 5
+		},
+		{
+			"index": 7,
+			"product_name": "Leather Brogue Shoes",
+			"slug": "Leather-Brogue-Shoes",
+			"product_image": "https://i.pinimg.com/736x/1e/20/37/1e2037235c88cbf8154dedb517747598.jpg",
+			"price": 249.99,
+			"category_id": 5,
+			"discount": 0
+		},
+		{
+			"index":8,
+			"product_name": "Graphic Print T-Shirt",
+			"slug": "Graphic-Print-T-Shirt",
+			"product_image": "https://i.pinimg.com/736x/2e/4a/28/2e4a284fd49933ea0cfd2e8049edc5b2.jpg",
+			"price": 49.95,
+			"category_id": 6,
+			"discount": 15
+		},
+		{
+			"index": 9,
+			"product_name": "Cotton Cable Knit Sweater",
+			"slug": "Cotton-Cable-Knit-Sweater",
+			"product_image": "https://i.pinimg.com/736x/64/45/dd/6445dd4cd966420c8ee2a448c769ab18.jpg",
+			"price": 179.50,
+			"category_id": 2,
+			"discount": 0
+		},
+		{
+			"index": 10,
+			"product_name": "Linen Button-Down Shirt",
+			"slug": "Linen-Button-Down-Shirt",
+			"product_image": "https://i.pinimg.com/736x/62/cf/0b/62cf0b3960ace57977f0bfbc7bd2e41a.jpg",
+			"price": 99.99,
+			"category_id": 4,
+			"discount": 0
+		},
+		{
+			"index": 11,
+			"product_name": "Suede Loafers",
+			"slug": "Suede-Loafers",
+			"product_image": "https://i.pinimg.com/736x/1e/77/2a/1e772a28f7471f12a6a4bd4f9fc09cb4.jpg",
+			"price": 219.75,
+			"category_id": 5,
+			"discount": 0
+		},
+		{
+			"index": 12,
+			"product_name": "V-Neck Cotton T-Shirt",
+			"slug": "V-Neck-Cotton-T-Shirt",
+			"product_image": "https://i.pinimg.com/736x/77/82/18/7782184c9e64f7eef8939d9d7efdc9d3.jpg",
+			"price": 29.95,
+			"category_id": 6,
+			"discount": 0
+		},
+		{
+			"index": 13,
+			"product_name": "Silk Polo Shirt",
+			"slug": "Silk-Polo-Shirt",
+			"product_image": "https://i.pinimg.com/736x/09/74/f0/0974f0267679a1cf618a7edb4200eac6.jpg",
+			"price": 149.50,
+			"category_id": 1,
+			"discount": 0
+		},
+		{
+			"index": 14,
+			"product_name": "Cotton Crewneck T-Shirt",
+			"slug": "Cotton-Crewneck-T-Shirt",
+			"product_image": "https://i.pinimg.com/736x/2b/26/40/2b2640286d156dd2be1fb2ea185be7b1.jpg",
+			"price": 39.99,
+			"category_id": 6,
+			"discount": 0
+		},
+		{
+			"index": 15,
+			"product_name": "Striped Polo Shirt",
+			"slug": "Striped-Polo-Shirt",
+			"product_image": "https://i.pinimg.com/736x/f2/94/fc/f294fc00c8ca09ca9a65bbb1cfd35855.jpg",
+			"price": 99.75,
+			"category_id": 1,
+			"discount": 0
+		},
+		{
+			"index": 16,
+			"product_name": "Alpaca Blend Cardigan",
+			"slug": "Alpaca-Blend-Cardigan",
+			"product_image": "https://i.pinimg.com/474x/9b/c3/7f/9bc37f1fb8b42d4f68196be75743390c.jpg",
+			"price": 219.00,
+			"category_id": 2,
+			"discount": 15
+		},
+		{
+			"index": 17,
+			"product_name": "Cargo Pants",
+			"slug": "Cargo-Pants",
+			"product_image": "https://i.pinimg.com/736x/53/60/35/536035e248fb4bfdc212817f35e64efd.jpg",
+			"price": 79.50,
+			"category_id": 3,
+			"discount": 0
+		},
+		{
+			"index": 18,
+			"product_name": "Linen Blend Shirt",
+			"slug": "Linen-Blend-Shirt",
+			"product_image": "https://i.pinimg.com/736x/88/00/a3/8800a3e13ed0bb29124f82be1f492bc6.jpg",
+			"price": 69.99,
+			"category_id": 4,
+			"discount": 0
+		},
+		{
+			"index": 19,
+			"product_name": "Merino Wool V-Neck Sweater",
+			"slug": "Merino-Wool-V-Neck-Sweater",
+			"product_image": "vneck_sweater.jpg",
+			"price": 129.00,
+			"category_id": 2,
+			"discount": 0
+		},
+		{
+			"index": 20,
+			"product_name": "Corduroy Pants",
+			"slug": "Corduroy-Pants",
+			"product_image": "corduroy_pants.jpg",
+			"price": 109.99,
+			"category_id": 3,
+			"discount": 0
+		},
+		{
+			"index": 21,
+			"product_name": "Striped Linen Shirt",
+			"slug": "Striped-Linen-Shirt",
+			"product_image": "striped_linen_shirt.jpg",
+			"price": 79.95,
+			"category_id": 4,
+			"discount": 0
+		}
+	]
+}

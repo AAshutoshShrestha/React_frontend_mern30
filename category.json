@@ -1,0 +1,43 @@
+{
+	"categories": [
+	  {
+		"id": 1,
+		"category_name": "Polos",
+		"slug": "polos",
+		"category_image": "https://i.pinimg.com/736x/77/82/18/7782184c9e64f7eef8939d9d7efdc9d3.jpg"
+	},
+	{
+		"id": 2,
+		"category_name": "Knitwear",
+		"slug": "knitwear",
+		"category_image": "https://i.pinimg.com/736x/09/74/f0/0974f0267679a1cf618a7edb4200eac6.jpg"
+	},
+	{
+		"id": 3,
+		"category_name": "Pants",
+		"slug": "pants",
+		"category_image": "https://i.pinimg.com/736x/5b/ee/a4/5beea4094a5c1b4eae4fbd688ed06b26.jpg"
+	  },
+	  {
+		"id": 4,
+		"category_name": "Shirts",
+		"slug": "shirts",
+		"category_image": "https://i.pinimg.com/736x/c8/6c/39/c86c392dd7cac76a02273f2b5ebf68ad.jpg"
+
+	  },
+	  {
+		"id": 5,
+		"category_name": "Footwear",
+		"slug" : "footwear",
+		"category_image": "https://i.pinimg.com/736x/1e/77/2a/1e772a28f7471f12a6a4bd4f9fc09cb4.jpg"
+
+	  },
+	  {
+		"id": 6,
+		"category_name": "T-Shirts",
+		"slug" : "tshirt",
+		"category_image": "https://i.pinimg.com/736x/2b/26/40/2b2640286d156dd2be1fb2ea185be7b1.jpg"
+	  }
+	]
+  }
+  
