@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent } from "react";
+// import { BaseSyntheticEvent } from "react";
 
 export enum INPUT_TYPE {
 	TEXT = 'text',
@@ -8,12 +8,12 @@ export enum INPUT_TYPE {
 	EMAIL = 'email',
 }
 
-export type handelChangeType = (e:BaseSyntheticEvent) => {}
+// export type handelChangeType = (e:BaseSyntheticEvent) => {}
 
 export interface ITextInputComponent{
 	type ?: string,
 	name : string,
 	defaultValue ?: string,
-	control : any,
+	control : unknown,
 	msg?: string | null | undefined,
 }

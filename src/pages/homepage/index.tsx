@@ -11,6 +11,7 @@ import { SingleProductSection } from "../../components/sections/SingleProduct.co
 
 
 import productData from '../../../product.json';
+import { AdsSection1 } from "../../components/sections/advertisement.component";
 const Homepage = () => {
 
 	const products = productData.products.slice(0, 8); // Limiting to first 8 products
@@ -70,7 +71,11 @@ const Homepage = () => {
 
 			<AboutSection />
 			<FaqSection />
-
+				
+			<AdsSection1
+				image_title="Knitware"
+				image_url="https://i.pinimg.com/736x/66/f3/9c/66f39c6c2428234104926ea6279c6ea9.jpg"
+			/>
 		
 		</React.Fragment>
 	)

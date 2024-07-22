@@ -3,6 +3,7 @@ import { ProductCardV2 } from "../../components/cards/cards.component"
 import { HeadingCta } from "../../components/common/CTA/title-with-btn.component"
 
 import productData from '../../../product.json';
+import { AdsSection1 } from "../../components/sections/advertisement.component";
 
 
 const CategoryDetailPage = () => {
@@ -33,6 +34,12 @@ const CategoryDetailPage = () => {
 					}
 				</div>
 			</div>
+
+
+			<AdsSection1
+				image_title="Knitware"
+				image_url="https://i.pinimg.com/736x/66/f3/9c/66f39c6c2428234104926ea6279c6ea9.jpg"
+			/>
 		</>
 	)
 }

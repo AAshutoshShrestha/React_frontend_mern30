@@ -1,3 +1,5 @@
+import { SearchField } from "./common/input/index.component"
+
 export const ApplicationNav = () => {
 	return (
 		<>
@@ -12,22 +14,11 @@ export const ApplicationNav = () => {
 								</svg>
 							</button>
 						</div>
-
-						<div className="hidden sm:block">
-							<label htmlFor="icon" className="sr-only">Search</label>
-							<div className="relative">
-								<div className="pointer-events-none absolute inset-y-0 start-0 z-20 flex items-center ps-4">
-									<svg className="size-4 flex-shrink-0 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-										<circle cx="11" cy="11" r="8" />
-										<path d="m21 21-4.3-4.3" />
-									</svg>
-								</div>
-								<input type="text" id="icon" name="icon" className="block w-full rounded-lg border-gray-200 py-2 pe-4 ps-10 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Search" />
-							</div>
-						</div>
+						
+						<SearchField/>
 
 						<div className="flex flex-row items-center justify-end gap-2">
-							<button type="button" className="inline-flex h-[2.375rem] w-[2.375rem] items-center justify-center gap-x-2 rounded-full text-sm font-semibold text-gray-500 hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:text-neutral-400 dark:hover:bg-neutral-700">
+							<button type="button" className="inline-flex h-[2.375rem] w-[2.375rem] items-center justify-center gap-x-2 rounded-full text-sm font-semibold text-gray-500 hover:bg-amber-100 disabled:pointer-events-none disabled:opacity-50 dark:text-neutral-400 dark:hover:bg-neutral-700">
 								<i className="ri-notification-3-line"></i>
 							</button>
 							<button type="button" className="hs-dropdown-toggle inline-flex h-[2.375rem] w-[2.375rem] items-center justify-center gap-x-2 rounded-full text-sm font-semibold text-gray-500 hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:text-neutral-400 dark:hover:bg-neutral-700" data-hs-offcanvas="#hs-offcanvas-right">

@@ -30,7 +30,7 @@ export const TextInputComponent = ({ type = INPUT_TYPE.TEXT, name, defaultValue 
 				{...field}
 				className="mt-2 py-3 px-4 block w-full border-2  border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
 			/>
-			<span className="mt-2 text-red-500 tetx-sm">{msg}</span>
+			<span className="text-sm text-red-600 mt-2 ms-2">{msg}</span>
 		</>
 	)
 }
@@ -65,7 +65,22 @@ export const RoleSelector = ({ name, defaultValue = '', msg, control }: ITextInp
 				)}
 
 			/>
-			<span className="mt-2 text-red-500 tetx-sm">{msg}</span>
+			<span className="text-sm text-red-600 mt-2">{msg}</span>
+		</>
+	)
+}
+
+export const SearchField = () => {
+	return (
+		<>
+			<label htmlFor="hs-trailing-button-add-on-with-icon-and-button" className="sr-only">Label</label>
+			<div className="relative flex rounded-lg shadow-sm max-w-lg">
+				<input type="text" id="hs-trailing-button-add-on-with-icon-and-button" name="hs-trailing-button-add-on-with-icon-and-button" className="block w-full rounded-s-lg border-gray-200 px-4 py-3 ps-11 text-sm shadow-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" />
+				<div className="pointer-events-none absolute inset-y-0 start-0 z-20 flex items-center ps-4">
+					<i className="ri-search-2-line flex-shrink-0 text-gray-400 dark:text-neutral-500 text-md"></i>
+				</div>
+				<button type="button" className="inline-flex items-center justify-center gap-x-2 rounded-e-md border border-transparent bg-amber-500 px-4 py-3 text-sm font-semibold text-white hover:bg-amber-700 disabled:pointer-events-none disabled:opacity-50">Search</button>
+			</div>
 		</>
 	)
 }

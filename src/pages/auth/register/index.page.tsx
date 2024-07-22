@@ -1,58 +1,43 @@
 // import { BaseSyntheticEvent, useState } from "react";
-import { BaseSyntheticEvent } from "react";
+import { BaseSyntheticEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { InputLabel, RoleSelector, TextInputComponent } from "../../../components/common/input/index.component";
 
-import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { INPUT_TYPE } from "../../../components/common/input/input.contract";
+import authSvc from "../auth.service";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 const RegisterPage = () => {
-	const RegisterDTO = Yup.object({
-		name: Yup.string().matches(/^[a-zA-Z ]+$/, "Name is compulsary")
-			.min(2)
-			.max(50)
-			.required(),
 
-		email: Yup.string()
-			.email()
-			.required(),
+	const RegisterUserDTO = authSvc.registerUserDTO();
+	const [loading, setLoading] = useState(false)
 
-		password: Yup.string()
-			.matches(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,25}$/, "Password must contain one digit from 1 to 9, one lowercase letter, one uppercase letter, one special character, no space, and it must be 8-25 characters long.")
-			.min(8)
-			.max(25)
-			.required(),
-
-		confirmPassword: Yup.string()
-			.oneOf([Yup.ref('password')])
-			.required(),
-
-		address: Yup.string()
-			.nullable()
-			.optional(),
-
-		phone: Yup.string()
-			.matches(/^\+[1-9]{1}[0-9]{3,14}$/, "Invalid Phone Number")
-			.min(10)
-			.max(20)
-			.required(),
-
-		image: Yup.mixed(),
-
-		role: Yup.string()
-			.matches(/^(admin|seller|customer)/, "Role can be admin, seller or customer only")		//validate 
-			.required()
+	const { control, handleSubmit, setValue, setError, formState: { errors } } = useForm({
+		resolver: yupResolver(RegisterUserDTO)
 	})
+	const navigate = useNavigate()
+	
+	const submitEvent = async (data: any) => {
+		setLoading(true)
+		try {
+			const responce = await authSvc.postRequest("/auth/register", data, { file: true })
+			toast.success(responce.message)
+			navigate('/')
 
-	const { control, handleSubmit, setValue, formState: { errors } } = useForm({
-		resolver: yupResolver(RegisterDTO)
-	})
-
-	const submitEvent = (data: object) => {
-		// ToDo: API Call
-		console.log(data);
+		} catch (exception: any) {
+			// handel error defination
+			if (+exception.status === 422) {
+				Object.keys(exception.data.result).map((field: any) => {
+					setError(field, { message: exception.data.result[field] })
+				})
+			}
+			toast.error(exception.data.message)	
+		} finally {
+			setLoading(false)
+		}
 
 	}
 
@@ -117,7 +102,7 @@ const RegisterPage = () => {
 						<div className="max-w-xl lg:max-w-3xl">
 							<div className="relative -mt-16 block lg:hidden">
 								<a
-									className="inline-flex size-16 items-center justify-center rounded-full bg-white text-blue-600 sm:size-20"
+									className="inline-flex size-16 items-center justify-center rounded-full bg-white text-amber-600 sm:size-20"
 									href="#"
 								>
 									<span className="sr-only">Home</span>
@@ -153,7 +138,7 @@ const RegisterPage = () => {
 										name="name"
 										type={INPUT_TYPE.TEXT}
 										control={control}
-										defaultValue="Enter Your Full-Name"
+										// defaultValue="Enter Your Full-Name"
 										msg={errors?.name ? "name is requires" : ""}
 									/>
 								</div>
@@ -165,7 +150,7 @@ const RegisterPage = () => {
 										name="email"
 										type={INPUT_TYPE.EMAIL}
 										control={control}
-										defaultValue="Enter Valid Email"
+										// defaultValue="Enter Valid Email"
 										msg={errors?.email ? "Email is requires" : ""}
 									/>
 								</div>
@@ -178,7 +163,7 @@ const RegisterPage = () => {
 										name="password"
 										type={INPUT_TYPE.PASSWORD}
 										control={control}
-										defaultValue="Create Password"
+										// defaultValue="Create Password"
 										msg={errors?.password ? "password is requires" : ""}
 									/>
 
@@ -186,12 +171,12 @@ const RegisterPage = () => {
 								</div>
 
 								<div className="col-span-6 sm:col-span-3">
-									<InputLabel htmlFor="confirm_password" value="Confirm Password" />
+									<InputLabel htmlFor="confirmPassword" value="Confirm Password" />
 
 									<TextInputComponent
-										name="confirm_password"
+										name="confirmPassword"
 										type={INPUT_TYPE.PASSWORD}
-										defaultValue="Confirm your Password"
+										// defaultValue="Confirm your Password"
 										control={control}
 									/>
 								</div>
@@ -202,10 +187,10 @@ const RegisterPage = () => {
 										name="address"
 										type={INPUT_TYPE.TEXT}
 										control={control}
-										defaultValue="Enter your address"
+										// defaultValue="Enter your address"
 										msg={errors?.address ? "Address is required" : ""}
 									/>
-									
+
 								</div>
 
 								<div className="col-span-6 sm:col-span-3">
@@ -215,9 +200,9 @@ const RegisterPage = () => {
 										name="phone"
 										type={INPUT_TYPE.TEL}
 										control={control}
-										defaultValue="Enter Phone number"
+									// defaultValue="Enter Phone number"
 									/>
-									
+
 								</div>
 
 								<div className="col-span-6 sm:col-span-3">
@@ -228,13 +213,14 @@ const RegisterPage = () => {
 										control={control}
 										msg={errors?.role ? "Role is required" : ""}
 									/>
-									
+
 								</div>
 
 								<div className="max-w-sm">
+									<InputLabel htmlFor="image" value="Select Profile" />
 									<label className="block" htmlFor="user_avater">
 										<span className="sr-only">Choose profile photo</span>
-										<input className="block w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 file:disabled:opacity-50 file:disabled:pointer-events-none dark:text-neutral-500 dark:file:bg-blue-500 dark:hover:file:bg-blue-400"
+										<input className="block w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-amber-600 file:text-white hover:file:bg-amber-700 file:disabled:opacity-50 file:disabled:pointer-events-none dark:text-neutral-500 dark:file:bg-amber-500 dark:hover:file:bg-amber-400"
 											type="file" id="user_avater" name="image"
 											accept="image/*"
 
@@ -243,9 +229,9 @@ const RegisterPage = () => {
 												e.preventDefault();
 												// for multiple uploades 
 												// object.value(e.target.files) =>[{file}]
-												// const name = e.target.name;
+												const Name = e.target.name;
 												const image = e.target.files[0];
-												setValue("image", image)
+												setValue(Name, image)
 											}}
 										/>
 									</label>
@@ -253,39 +239,27 @@ const RegisterPage = () => {
 								</div>
 
 								<div className="col-span-6">
-									<label htmlFor="MarketingAccept" className="flex gap-4">
-										<input
-											type="checkbox"
-											id="MarketingAccept"
-											name="marketing_accept"
-											className="size-5 rounded-md border-gray-200 bg-white shadow-sm"
-										/>
-
-										<span className="text-sm text-gray-700">
-											I want to receive emails about events, product updates and company announcements.
-										</span>
-									</label>
-								</div>
-
-								<div className="col-span-6">
-									<p className="text-sm text-gray-500">
+									<p className="text-sm text-gray-500 pt-8">
+										<input type="checkbox" className="shrink-0 mt-1 border-gray-200 rounded text-amber-600 focus:ring-amber-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-amber-500 dark:checked:border-amber-500 dark:focus:ring-offset-gray-800 me-2" id="hs-checked-checkbox" />
 										By creating an account, you agree to our
-										<a href="#" className="text-gray-700 underline"> terms and conditions </a>
+										<a href="#" className="text-amber-700 underline"> terms and conditions </a>
 										and
-										<a href="#" className="text-gray-700 underline">privacy policy</a>.
+										<a href="#" className="text-amber-700 underline">privacy policy</a>.
 									</p>
 								</div>
 
 								<div className="col-span-6 sm:flex sm:items-center sm:gap-4">
 									<button
-										className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+										className="inline-block shrink-0 rounded-md border border-amber-600 bg-amber-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-amber-600 focus:outline-none focus:ring active:text-amber-500"
+										type="submit"
+										disabled={loading}
 									>
 										Create an account
 									</button>
 
 									<p className="mt-4 text-sm text-gray-500 sm:mt-0">
 										Already have an account?
-										<a href="#" className="text-gray-700 underline">Log in</a>.
+										<a href="#" className="text-amber-500 underline">Log in</a>.
 									</p>
 								</div>
 							</form>

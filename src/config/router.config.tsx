@@ -8,14 +8,19 @@ import HomeLayout from "../pages/layout/homeLayout.page"
 import CategoryDetailPage from "../pages/categories/categoryDetail.page"
 import ProductDetailPage from "../pages/Products/productDetail.page"
 
-import {RegisterPage,LoginPage} from "../pages/auth/index"
+import {RegisterPage,LoginPage,ActivationPage} from "../pages/auth/index"
 import DashboardLayout from "../pages/layout/DashboardLayout.page"
 import DashboardMain from "../pages/dashboard/admin.component"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/ReactToastify.css"
 
 
 export const RouterConfig = () => {
 	return (
 		<>
+		<ToastContainer
+			theme="dark"
+		/>
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<HomeLayout />}>
@@ -25,6 +30,7 @@ export const RouterConfig = () => {
 						<Route path="categories/:slug" element={<CategoryDetailPage />}/>
 						<Route path="product/:pid/:slug" element={<ProductDetailPage />}/>
 						<Route path="about-us" element={<AboutUsPage/>}/>
+						<Route path="activate/:token" element={<ActivationPage/>}/>
 					</Route>
 					<Route path="/sign-up" element={<RegisterPage/>}></Route>
 					<Route path="/sign-in" element={<LoginPage />}></Route>
