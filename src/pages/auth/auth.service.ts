@@ -41,6 +41,20 @@ class AuthService  extends HttpService{
 		})
 		return RegisterUserDTO
 	}
+
+	loginUserDTO = () => {
+		const LogginDTO = Yup.object({
+			email: Yup.string()
+				.email()
+				.required(),
+			password: Yup.string()
+				.min(8)
+				.max(25)
+				.required(),
+		})
+
+		return LogginDTO
+	}
 }
 
 

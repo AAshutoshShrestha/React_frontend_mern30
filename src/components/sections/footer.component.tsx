@@ -24,15 +24,15 @@ export const Footer = () => {
                   <i className="ri-twitter-x-fill text-2xl hover:text-3xl"></i>
                 </a>
               </div>
-              <div className="flex flex-wrap">
-                <div className="w-1/3 px-1 mb-2 lg:mb-0">
-                  <i className="ri-twitter-x-fill text-2xl hover:text-3xl">visa</i>
+              <div className="flex flex-wrap gap-4">
+                <div className="px-1 mb-2 lg:mb-0">
+                  <i className="ri-paypal-line text-3xl hover:text-4xl"></i>
                 </div>
-                <div className="w-1/3 px-1 mb-2 lg:mb-0">
-                  <i className="ri-twitter-x-fill text-2xl hover:text-3xl">paypal</i>
+                <div className="px-1 mb-2 lg:mb-0">
+                  <i className="ri-visa-line text-3xl hover:text-4xl"></i>
                 </div>
-                <div className="w-1/3 px-1 mb-2 lg:mb-0">
-                  <i className="ri-twitter-x-fill text-2xl hover:text-3xl">mastercard</i>
+                <div className="px-1 mb-2 lg:mb-0">
+                  <i className="ri-mastercard-line text-3xl hover:text-4xl"></i>
                 </div>
               </div>
               

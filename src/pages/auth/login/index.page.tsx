@@ -2,33 +2,52 @@
 import { useForm } from "react-hook-form";
 import { Heading1 } from "../../../components/common/typography/typography.component";
 
-import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { InputLabel, TextInputComponent } from "../../../components/common/input/index.component";
 import { INPUT_TYPE } from "../../../components/common/input/input.contract";
+import { useState } from "react";
+import authSvc from "../auth.service";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
-	const LogginDto = Yup.object({
-		email: Yup.string().required("Email is required").email("Invalid email format"),
-		password: Yup.string()
-			.required("Password is required")
-			.min(2,"Password must be minimum of 2 characters")
-			.max(25,"Password must be maximum of 25 characters")
+	const LoginDTO = authSvc.loginUserDTO();
+	const [loading, setLoading] = useState(false)
+
+	const { control, handleSubmit, setError, formState: { errors } } = useForm({
+		resolver: yupResolver(LoginDTO)
 	})
 
-	const { control, handleSubmit, formState: { errors } } = useForm({
-		resolver: yupResolver(LogginDto)
-	})
+	const navigate = useNavigate()
 
-	const LoginAction = (data: object) => {
-		// todo
-		console.log(data);
+	const submitEvent = async (data: any) => {
+		setLoading(true)
+		try {
+			const responce = await authSvc.postRequest("/auth/login", data)
+			toast.success(responce.message)
+			navigate('/')
+
+		} catch (exception: any) {
+			// handel error defination
+			if (+exception.status === 422) {
+				Object.keys(exception.data.result).map((field: any) => {
+					setError(field, { message: exception.data.result[field] })
+				})
+			}
+			toast.error(exception.data.message)
+		} finally {
+			setLoading(false)
+		}
 
 	}
+
+	console.log(errors);
+
+
 	return (
 		<>
-			<section className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+			<section className="min-h-screen grid grid-cols-1 gap-6 lg:grid-cols-12">
 
 				<div className="col-span-1 lg:col-span-7">
 					<img
@@ -66,27 +85,33 @@ const LoginPage = () => {
 
 					</div>
 
-					<form onSubmit={handleSubmit(LoginAction)} className="p-4 space-y-4">
-						<InputLabel htmlFor="email" value="Enter Email" />
+					<form onSubmit={handleSubmit(submitEvent)} className="p-4 space-y-4">
+						<InputLabel htmlFor="email" value="Email Address" />
 
 						<TextInputComponent
-							control={control}
 							name="email"
 							type={INPUT_TYPE.EMAIL}
-							msg={errors?.email ? "Email is required": ""}
+							control={control}
+							// defaultValue="Enter Valid Email"
+							msg={errors?.email ? "Email is requires" : ""}
 						/>
 
-						<InputLabel htmlFor="password" value="Enter Password" />
+						<InputLabel htmlFor="password" value="Password" />
 
 						<TextInputComponent
-							control={control}
 							name="password"
 							type={INPUT_TYPE.PASSWORD}
-							msg={errors?.password ? "Password is requires" : ""}
+							control={control}
+							// defaultValue="Create Password"
+							msg={errors?.password ? "password is requires" : ""}
 						/>
 
 						<div className="text-center">
-							<button type="submit" className="h-12 items-center rounded-lg bg-gray-900 px-12 text-sm font-semibold text-white transition duration-200 hover:bg-gray-300 hover:text-black focus:ring-4 focus:ring-gray-200">Login</button>
+							<button
+								type="submit"
+								className="h-12 items-center rounded-lg bg-gray-900 px-12 text-sm font-semibold text-white transition duration-200 hover:bg-gray-300 hover:text-black focus:ring-4 focus:ring-gray-200"
+								disabled={loading}
+							>Login</button>
 						</div>
 					</form>
 					<div className="bg-gray-100 px-4 py-4 rounded-md">

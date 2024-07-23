@@ -6,12 +6,12 @@ abstract class HttpService {
 
 	private getHeaders = (config: any) => {
 		// auth
-		if (config.auth) {
-			this.headers = {
-				...this.headers,
-				Authorization: "Bearer ",
-			};
-		}
+		// if (config.Auth) {
+		// 	this.headers = {
+		// 		...this.headers,
+		// 		Authorization: "Bearer ",
+		// 	};
+		// }
 
 		if (config && (config.file || config.files)) {
 			this.headers = {
