@@ -26,6 +26,12 @@ const LoginPage = () => {
 		try {
 			const responce = await authSvc.postRequest("/auth/login", data)
 			toast.success(responce.message)
+			
+			let accessToken = responce.result.token.accessToken
+			let refreshToken = responce.result.token.refreshToken
+			console.log(`AccessToken = ${accessToken}`);
+			console.log(`RefreshToken = ${refreshToken}`);
+			
 			navigate('/')
 
 		} catch (exception: any) {
@@ -119,7 +125,7 @@ const LoginPage = () => {
 							<a href="#" className="block text-xs text-amber-600 hover:text-gray-400">Forgot password?</a>
 							<a href="#" className="block text-xs text-amber-600 hover:text-gray-400">Privacy & Terms</a>
 						</div>
-						<p className="mt-2 text-xs font-light text-center text-gray-400"> Don't have an account? <a href="#" className="font-medium text-gray-700 dark:text-gray-200 hover:underline">Create One</a></p>
+						<p className="mt-2 text-xs font-light text-center text-gray-400"> Don't have an account? <a href="/sign-up" className="font-medium text-gray-700 dark:text-gray-200 hover:underline">Create One</a></p>
 
 					</div>
 				</div>

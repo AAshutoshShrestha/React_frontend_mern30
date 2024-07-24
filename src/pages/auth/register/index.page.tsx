@@ -29,6 +29,8 @@ const RegisterPage = () => {
 
 		} catch (exception: any) {
 			// handel error defination
+			// console.log("error " + exception.responce);
+			
 			if (+exception.status === 422) {
 				Object.keys(exception.data.result).map((field: any) => {
 					setError(field, { message: exception.data.result[field] })
@@ -41,7 +43,7 @@ const RegisterPage = () => {
 
 	}
 
-	console.log(errors);
+	// console.log(errors);
 
 	// const [data, setData] = useState({});
 
@@ -138,8 +140,7 @@ const RegisterPage = () => {
 										name="name"
 										type={INPUT_TYPE.TEXT}
 										control={control}
-										// defaultValue="Enter Your Full-Name"
-										msg={errors?.name ? "name is requires" : ""}
+										msg={errors?.name?.message}
 									/>
 								</div>
 
@@ -150,8 +151,7 @@ const RegisterPage = () => {
 										name="email"
 										type={INPUT_TYPE.EMAIL}
 										control={control}
-										// defaultValue="Enter Valid Email"
-										msg={errors?.email ? "Email is requires" : ""}
+										msg={errors?.email?.message}
 									/>
 								</div>
 
@@ -163,8 +163,7 @@ const RegisterPage = () => {
 										name="password"
 										type={INPUT_TYPE.PASSWORD}
 										control={control}
-										// defaultValue="Create Password"
-										msg={errors?.password ? "password is requires" : ""}
+										msg={errors?.password?.message}
 									/>
 
 
@@ -176,7 +175,6 @@ const RegisterPage = () => {
 									<TextInputComponent
 										name="confirmPassword"
 										type={INPUT_TYPE.PASSWORD}
-										// defaultValue="Confirm your Password"
 										control={control}
 									/>
 								</div>
@@ -187,8 +185,7 @@ const RegisterPage = () => {
 										name="address"
 										type={INPUT_TYPE.TEXT}
 										control={control}
-										// defaultValue="Enter your address"
-										msg={errors?.address ? "Address is required" : ""}
+										msg={errors?.address?.message}
 									/>
 
 								</div>
@@ -200,7 +197,6 @@ const RegisterPage = () => {
 										name="phone"
 										type={INPUT_TYPE.TEL}
 										control={control}
-									// defaultValue="Enter Phone number"
 									/>
 
 								</div>
@@ -211,7 +207,7 @@ const RegisterPage = () => {
 									<RoleSelector
 										name="role"
 										control={control}
-										msg={errors?.role ? "Role is required" : ""}
+										msg={errors?.role?.message}
 									/>
 
 								</div>

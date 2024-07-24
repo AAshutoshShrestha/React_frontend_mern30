@@ -5,13 +5,13 @@ abstract class HttpService {
 	private params = {};
 
 	private getHeaders = (config: any) => {
-		// auth
-		// if (config.Auth) {
-		// 	this.headers = {
-		// 		...this.headers,
-		// 		Authorization: "Bearer ",
-		// 	};
-		// }
+		// updated auth code for login and logout
+		if (config && config.Auth) {
+			this.headers = {
+				...this.headers,
+				Authorization: `Bearer ${config.token}`,
+			};
+		}
 
 		if (config && (config.file || config.files)) {
 			this.headers = {
@@ -59,11 +59,17 @@ abstract class HttpService {
 		}
 	};
 
-	// putRequest = async(url: string, data: unknown = {}, config: unknown = null):Promise<any> => {};
+	// putRequest = async(url: string, data: unknown = {}, config: unknown = null):Promise<any> => {
+	// 	// complete the code
+	// };
 
-	// patchRequest = async(url: string, data: unknown = {}, config: unknown = null):Promise<any> => {};
+	// patchRequest = async(url: string, data: unknown = {}, config: unknown = null):Promise<any> => {
+	// 	// complete the code
+	// };
 
-	// deleteRequest = async(url: string, config: unknown = null):Promise<any> => {};
+	// deleteRequest = async(url: string, config: unknown = null):Promise<any> => {
+	// 	// complete the code
+	// };
 }
 
 export default HttpService;
