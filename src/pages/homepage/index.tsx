@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ClientSection } from "../../components/sections/logo.component";
 import { OfferSection } from "../../components/offer.component";
 import { HeroSection } from "../../components/sections/hero.component";

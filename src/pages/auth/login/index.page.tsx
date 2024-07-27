@@ -6,10 +6,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { InputLabel, TextInputComponent } from "../../../components/common/input/index.component";
 import { INPUT_TYPE } from "../../../components/common/input/input.contract";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import authSvc from "../auth.service";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import AuthContext from "../../../context/auth.content";
 
 const LoginPage = () => {
 	const LoginDTO = authSvc.loginUserDTO();
@@ -19,28 +20,29 @@ const LoginPage = () => {
 		resolver: yupResolver(LoginDTO)
 	})
 
+	const Auth:any = useContext(AuthContext)
+
 	const navigate = useNavigate()
 
 	const submitEvent = async (data: any) => {
 		setLoading(true)
 		try {
 			const responce = await authSvc.postRequest("/auth/login", data)
-			toast.success(responce.message)
-			
-			let accessToken = responce.result.token.accessToken
-			let refreshToken = responce.result.token.refreshToken
-			console.log(`AccessToken = ${accessToken}`);
-			console.log(`RefreshToken = ${refreshToken}`);
-			
-			navigate('/')
 
+			localStorage.setItem("_at",responce.result.token.accessToken)
+			localStorage.setItem("_rt",responce.result.token.refreshToken)
+			toast.success("Welcome! you have been Succesfully logged in.")
+			
+			Auth.setLoggedInUser(responce.result.userDetail)
+
+			navigate('/')
 		} catch (exception: any) {
 			// handel error defination
-			if (+exception.status === 422) {
-				Object.keys(exception.data.result).map((field: any) => {
-					setError(field, { message: exception.data.result[field] })
-				})
-			}
+			// if (+exception.status === 422) {
+			// 	Object.keys(exception.data.result).map((field: any) => {
+			// 		setError(field, { message: exception.data.result[field] })
+			// 	})
+			// }
 			toast.error(exception.data.message)
 		} finally {
 			setLoading(false)
@@ -99,7 +101,7 @@ const LoginPage = () => {
 							type={INPUT_TYPE.EMAIL}
 							control={control}
 							// defaultValue="Enter Valid Email"
-							msg={errors?.email ? "Email is requires" : ""}
+							msg={errors?.email?.message }
 						/>
 
 						<InputLabel htmlFor="password" value="Password" />
@@ -109,7 +111,7 @@ const LoginPage = () => {
 							type={INPUT_TYPE.PASSWORD}
 							control={control}
 							// defaultValue="Create Password"
-							msg={errors?.password ? "password is requires" : ""}
+							msg={errors?.password?.message}
 						/>
 
 						<div className="text-center">

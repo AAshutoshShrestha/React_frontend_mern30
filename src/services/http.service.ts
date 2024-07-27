@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import axiosInstance from "../config/axios.config";
 
 abstract class HttpService {
@@ -6,10 +7,17 @@ abstract class HttpService {
 
 	private getHeaders = (config: any) => {
 		// updated auth code for login and logout
+
 		if (config && config.Auth) {
+			let token = localStorage.getItem("_at") || null 
+			if (!token) {
+				toast.error("Login First")
+				// redirect
+				document.location.href = "/sign-in"
+			}
 			this.headers = {
 				...this.headers,
-				Authorization: `Bearer ${config.token}`,
+				Authorization: "Bearer "+token
 			};
 		}
 

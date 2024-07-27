@@ -1,5 +1,12 @@
+import { useContext } from "react"
 import { Outlet } from "react-router-dom"
+import AuthContext from "../../context/auth.content"
+
+
 const DashboardLayout = () => {
+	const LoggedInUser = useContext(AuthContext)
+	console.log(LoggedInUser);
+
 	return (
 		<>
 			<div className="sticky inset-x-0 top-0 z-20 border-y bg-white px-4 sm:px-6 md:px-8 lg:hidden dark:border-neutral-700 dark:bg-neutral-800">
