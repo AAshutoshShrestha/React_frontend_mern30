@@ -1,14 +1,16 @@
 interface BtnProps {
 	href : string,
 	value :  string
-	icons ?:  string
+	iconsName ?:  string
 
 }
-export const PrimaryBtn = ({href, value,icons }: BtnProps) => {
+export const PrimaryBtn = ({href, value,iconsName }: BtnProps) => {
 	return (
 		<>
 			<a href={href} className={'inline-flex h-12 items-center rounded-full bg-gray-900 px-8 text-sm font-semibold text-white transition duration-200 hover:bg-gray-300 hover:text-black focus:ring-4 focus:ring-gray-200 m-2'}>
-				<span className="me-2">{icons}</span>
+				<span className="me-2">
+				<i className={`$iconName`} text-md></i>
+				</span>
 				{value}</a>
 		</>
 	)

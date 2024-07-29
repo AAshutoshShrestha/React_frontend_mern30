@@ -1,5 +1,5 @@
 // import { BaseSyntheticEvent, useState } from "react";
-import { BaseSyntheticEvent, useState } from "react";
+import { BaseSyntheticEvent, useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { InputLabel, RoleSelector, TextInputComponent } from "../../../components/common/input/index.component";
 
@@ -8,12 +8,14 @@ import { INPUT_TYPE } from "../../../components/common/input/input.contract";
 import authSvc from "../auth.service";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import AuthContext from "../../../context/auth.content";
 
 
 const RegisterPage = () => {
 
 	const RegisterUserDTO = authSvc.registerUserDTO();
 	const [loading, setLoading] = useState(false)
+	const Auth:any = useContext(AuthContext)
 
 	const { control, handleSubmit, setValue, setError, formState: { errors } } = useForm({
 		resolver: yupResolver(RegisterUserDTO)
@@ -42,6 +44,13 @@ const RegisterPage = () => {
 		}
 
 	}
+
+	useEffect(()=>{
+		if(Auth.LoggedInUser){
+			toast.info("You are already logged in")
+			navigate("/admin")
+		}
+	},[Auth])
 
 	// console.log(errors);
 

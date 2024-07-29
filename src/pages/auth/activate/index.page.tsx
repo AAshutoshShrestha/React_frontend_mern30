@@ -1,13 +1,20 @@
 import LoadingSpinner from "../../../components/common/loading/index.component";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import authSvc from "../auth.service";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import AuthContext from "../../../context/auth.content";
+import { toast } from "react-toastify";
 
 const ActivationPage = () => {
 
 	const [loading, setLoading] = useState(true);
 	let [msg, setMsg] = useState("");
 	let [isExpired, setIsExpire] = useState(false);
+
+	const Auth:any = useContext(AuthContext)
+
+	const navigate = useNavigate()
+
 
 	const params = useParams()
 
@@ -51,6 +58,14 @@ const ActivationPage = () => {
 	useEffect(() => {
 		getVerified()
 	}, [])
+
+
+	useEffect(()=>{
+		if(Auth.LoggedInUser){
+			toast.info("You are already logged in")
+			navigate("/admin")
+		}
+	},[Auth])
 
 	return (
 		<>

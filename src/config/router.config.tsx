@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify"
 import "react-toastify/ReactToastify.css"
 import { AuthProvider } from "../context/auth.content"
 import AllowUser from "./permission-config"
+import {BannerCreate, BannerPage} from "../pages/banner/index"
 
 // context
 
@@ -36,6 +37,8 @@ export const RouterConfig = () => {
 								<Route path="product/:pid/:slug" element={<ProductDetailPage />} />
 								<Route path="about-us" element={<AboutUsPage />} />
 								<Route path="activate/:token" element={<ActivationPage />} />
+
+								<Route path="*" element={<NotFoundPage />}></Route>
 							</Route>
 
 							<Route path="/sign-up" element={<RegisterPage />}></Route>
@@ -43,9 +46,12 @@ export const RouterConfig = () => {
 
 							<Route path="/admin" element={<AllowUser allowuser="admin"><DashboardLayout /></AllowUser>}>
 								<Route index element={<DashboardMain />} />
+								<Route path="banner" element={<BannerPage />} />
+								<Route path="banner/create" element={<BannerCreate />} />
+								
+								<Route path="*" element={<NotFoundPage />}></Route>
 							</Route>
 
-							<Route path="*" element={<NotFoundPage />}></Route>
 						</Routes>
 					</BrowserRouter>
 				</>

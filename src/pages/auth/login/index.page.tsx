@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { InputLabel, TextInputComponent } from "../../../components/common/input/index.component";
 import { INPUT_TYPE } from "../../../components/common/input/input.contract";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import authSvc from "../auth.service";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -16,7 +16,7 @@ const LoginPage = () => {
 	const LoginDTO = authSvc.loginUserDTO();
 	const [loading, setLoading] = useState(false)
 
-	const { control, handleSubmit, setError, formState: { errors } } = useForm({
+	const { control, handleSubmit, formState: { errors } } = useForm({
 		resolver: yupResolver(LoginDTO)
 	})
 
@@ -49,6 +49,13 @@ const LoginPage = () => {
 		}
 
 	}
+
+	useEffect(()=>{
+		if(Auth.LoggedInUser){
+			toast.info("You are already logged in")
+			navigate("/admin")
+		}
+	},[Auth])
 
 	console.log(errors);
 
