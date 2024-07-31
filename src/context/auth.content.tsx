@@ -18,9 +18,9 @@ export const AuthProvider = ({ children }: { children: any }) => {
 		} catch (exception:any) {
 			if(exception.status === 401){
 				if(exception.data.message === "jwt expired"){
-					localStorage.removeItem("_at")
-					localStorage.removeItem("_rt")
 				}
+				localStorage.removeItem("_at")
+				localStorage.removeItem("_rt")
 			}
 			console.log(exception);
 		}

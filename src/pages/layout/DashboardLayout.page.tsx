@@ -14,6 +14,11 @@ const adminMenu: any = [
 		icon: <i className="ri-home-3-line text-md me-2"></i>
 	},
 	{
+		name: "Banner",
+		url: "/admin/banner",
+		icon: <i className="ri-file-list-line text-md me-2"></i>
+	},
+	{
 		name: "Categories",
 		url: "/admin/categories",
 		icon: <i className="ri-archive-drawer-line text-md me-2"></i>
@@ -22,11 +27,6 @@ const adminMenu: any = [
 		name: "Brand",
 		url: "/admin/brand",
 		icon: <i className="ri-home-3-line text-md me-2"></i>
-	},
-	{
-		name: "Banner",
-		url: "/admin/banner",
-		icon: <i className="ri-file-list-line text-md me-2"></i>
 	},
 	{
 		name: "Products",
