@@ -54,7 +54,7 @@ abstract class HttpService {
 		}
 	};
 
-	getRequest = async (url: string, config: unknown = null): Promise<any> => {
+	getRequest = async (url: string, config: any = null): Promise<any> => {
 		try {
 			this.getHeaders(config);
 			const response = await axiosInstance.get(url, {
@@ -102,19 +102,20 @@ abstract class HttpService {
 		}
 	};
 
-	deleteRequest = async (url: string, config: unknown = null): Promise<any> => {
-		try {
-			this.getHeaders(config);
-			const response = await axiosInstance.delete(url, {
-				headers: { ...this.headers },
-				params: { ...this.params },
-			});
-			return response;
-		} catch (error) {
-			console.log("DeleteRequestException", error);
-			throw error;
-		}
-	};
+	deleteRequest = async(url:string, config: any = null) => {
+        try {
+            this.getHeaders(config);
+            const response = await axiosInstance.delete(url, {
+                headers: {...this.headers},
+                params: {...this.params}
+            })
+            return response
+
+        } catch(exception) {
+            console.error("DeleteRequestException: ", exception);
+            throw exception
+        }
+    }
 }
 
 export default HttpService;

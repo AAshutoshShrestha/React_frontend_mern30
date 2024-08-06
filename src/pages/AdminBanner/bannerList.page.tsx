@@ -1,5 +1,3 @@
-import { FaPlus } from "react-icons/fa6";
-import { NavLink } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { Table, Pagination, TextInput, Badge } from "flowbite-react";
 import { FaSearch } from "react-icons/fa";

@@ -1,7 +1,7 @@
 // import { useEffect, useState } from "react"
 
 import { useEffect, useState } from "react";
-import bannerSvc from "../../pages/banner/banner.service";
+import bannerSvc from "../../pages/AdminBanner/banner.service";
 import LoadingSpinner from "../common/loading/index.component";
 import { Carousel } from "flowbite-react";
 

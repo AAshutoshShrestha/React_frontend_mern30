@@ -44,6 +44,7 @@ const NavBar = () => {
 								auth && auth ?
 									<>
 										<NavLink to="/admin" type="button" className="mr-2 rounded-lg bg-amber-700 px-4 py-2 text-sm font-medium text-white hover:bg-amber-800 focus:outline-none focus:ring-4 focus:ring-amber-300 lg:px-5 lg:py-2.5 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800">{auth.role}</NavLink>
+										<NavLink to="/chat" type="button" className="mr-2 rounded-lg bg-amber-700 px-4 py-2 text-sm font-medium text-white hover:bg-amber-800 focus:outline-none focus:ring-4 focus:ring-amber-300 lg:px-5 lg:py-2.5 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800">{"Chat"}</NavLink>
 									</> :
 									<>
 										<NavLink to="/sign-in" type="button" className="mr-2 rounded-lg px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-300 lg:px-5 lg:py-2.5 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-800">Sign in</NavLink>

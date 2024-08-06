@@ -15,12 +15,15 @@ import { ToastContainer } from "react-toastify"
 import "react-toastify/ReactToastify.css"
 import { AuthProvider } from "../context/auth.content"
 import AllowUser from "./permission-config"
-import { BannerCreate, BannerPage } from "../pages/banner/index"
 import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import { getLoggedInUserFromReducer } from "../reducer/auth.reducer"
 import LoadingSpinner from "../components/common/loading/index.component"
-import BannerEdit from "../pages/banner/bannerEdit.page"
+
+import { BannerCreate, BannerPage, BannerEdit } from "../pages/AdminBanner/index"
+import { BrandCreate, BrandEdit, BrandPage } from "../pages/AdminBrand"
+import ChatDisplay from "../pages/chat/chat.page"
+
 
 // context
 
@@ -48,6 +51,9 @@ export const RouterConfig = () => {
 							/>
 							<BrowserRouter>
 								<Routes>
+									<Route path="/sign-up" element={<RegisterPage />}></Route>
+									<Route path="/sign-in" element={<LoginPage />}></Route>
+									
 									<Route path="/" element={<HomeLayout />}>
 										<Route index element={<Homepage />} />
 										<Route path="products" element={<AllProductsPage />} />
@@ -57,17 +63,22 @@ export const RouterConfig = () => {
 										<Route path="about-us" element={<AboutUsPage />} />
 										<Route path="activate/:token" element={<ActivationPage />} />
 
+										<Route path="chat" element={<ChatDisplay />} />
+
 										<Route path="*" element={<NotFoundPage />}></Route>
 									</Route>
 
-									<Route path="/sign-up" element={<RegisterPage />}></Route>
-									<Route path="/sign-in" element={<LoginPage />}></Route>
 
 									<Route path="/admin" element={<AllowUser allowuser="admin"><DashboardLayout /></AllowUser>}>
 										<Route index element={<DashboardMain />} />
+
 										<Route path="banner" element={<BannerPage />} />
 										<Route path="banner/create" element={<BannerCreate />} />
 										<Route path="banner/:id/edit" element={<BannerEdit />} />
+
+										<Route path="brand" element={<BrandPage />} />
+										<Route path="brand/create" element={<BrandCreate />} />
+										<Route path="brand/:id/edit" element={<BrandEdit />} />
 
 										<Route path="*" element={<NotFoundPage />}></Route>
 									</Route>
