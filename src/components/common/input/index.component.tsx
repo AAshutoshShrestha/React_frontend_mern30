@@ -1,6 +1,7 @@
 import { Controller, useController } from "react-hook-form"
-import { INPUT_TYPE, ITextInputComponent } from "./input.contract"
-
+import { INPUT_TYPE, ITextInputComponent, ISelectProps, IFileInputComponent } from "./input.contract"
+import { useState } from "react"
+import Select from "react-select"
 
 export const InputLabel = ({ value, htmlFor }: { value: string, htmlFor: string }) => {
 	return (
@@ -83,4 +84,67 @@ export const SearchField = () => {
 			</div>
 		</>
 	)
+}
+
+export const SingleImageUpload = ({ name, setValue, msg, imageUrl = null }: IFileInputComponent) => {
+	const [thumb, setThumb] = useState();
+	return (<>
+		<div className="flex">
+			<div className="w-1/4  me-3">
+				<input
+					className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+					aria-describedby="user_avatar_help"
+					id={name}
+					type="file"
+					name={name}
+					accept="image/*"
+					onChange={(e: any) => {
+						e.preventDefault()
+						const name = e.target.name;
+						const image = e.target.files[0];
+						setValue(name, image)
+						setThumb(image);
+					}}
+				/>
+			</div>
+			<div className="w-3/4">
+				<img className="w-full h-60" src={thumb && typeof thumb === 'object' ? URL.createObjectURL(thumb) : (imageUrl && typeof imageUrl === 'string' ? imageUrl : 'https://placehold.co/400x150?text=Image+not+found')} alt="Image" />
+			</div>
+		</div>
+		
+	</>)
+}
+
+
+export const  SelectComponent = ({options, name, control, defaultValue, msg, multiple=false}: ISelectProps) => {
+    const {field} = useController({
+        control: control,
+        name: name, 
+        defaultValue: defaultValue
+    })
+    return (<>
+        <Select 
+            options={options}
+            {...field} 
+            isMulti={multiple}
+            isClearable
+        />
+        <span className="text-sm italic text-red-700">{msg}</span>
+    </>)
+}
+
+
+
+export const StatusSelector = ({control, name, defaultValue, msg}: ITextInputComponent) => {
+    
+    return (<>
+        <SelectComponent 
+            options={[{label: "Publish", value:"active"},{label: "UnPublish", value:"inactive"}]}
+            control={control}
+            name={name}
+            defaultValue={defaultValue}
+            msg={msg}
+        ></SelectComponent> 
+        
+    </>)
 }

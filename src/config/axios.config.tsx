@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // http:/localhost:5500/
-const  axiosInstance = axios.create({
+const axiosInstance = axios.create({
 	// cra => process.env.REACT_APP_URL
 	// vite => import.meta.env.VITE_API_URL
 

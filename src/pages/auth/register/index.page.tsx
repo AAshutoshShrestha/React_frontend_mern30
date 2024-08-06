@@ -9,11 +9,13 @@ import authSvc from "../auth.service";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import AuthContext from "../../../context/auth.content";
+// import { GoogleLogin } from "@react-oauth/google";
 
 
 const RegisterPage = () => {
 
 	const RegisterUserDTO = authSvc.registerUserDTO();
+
 	const [loading, setLoading] = useState(false)
 	const Auth:any = useContext(AuthContext)
 
@@ -51,22 +53,6 @@ const RegisterPage = () => {
 			navigate("/admin")
 		}
 	},[Auth])
-
-	// console.log(errors);
-
-	// const [data, setData] = useState({});
-
-	// const handelChange = (e: BaseSyntheticEvent) => {
-	//   e.preventDefault();
-	//   const value = e.target.value;
-	//   const name = e.target.name;
-	//   setData({
-	//     ...data,
-	//     [name]: value,
-
-	//   })
-
-
 
 	return (
 		<>
@@ -224,21 +210,18 @@ const RegisterPage = () => {
 								<div className="max-w-sm">
 									<InputLabel htmlFor="image" value="Select Profile" />
 									<label className="block" htmlFor="user_avater">
-										<span className="sr-only">Choose profile photo</span>
 										<input className="block w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-amber-600 file:text-white hover:file:bg-amber-700 file:disabled:opacity-50 file:disabled:pointer-events-none dark:text-neutral-500 dark:file:bg-amber-500 dark:hover:file:bg-amber-400"
 											type="file" id="user_avater" name="image"
 											accept="image/*"
 
 											onChange={(e: BaseSyntheticEvent) => {
-
 												e.preventDefault();
-												// for multiple uploades 
-												// object.value(e.target.files) =>[{file}]
 												const Name = e.target.name;
 												const image = e.target.files[0];
 												setValue(Name, image)
 											}}
 										/>
+										<span className="text-sm italic text-red-700">{errors?.image?.message as string}</span>
 									</label>
 
 								</div>
@@ -268,6 +251,15 @@ const RegisterPage = () => {
 									</p>
 								</div>
 							</form>
+							{/* <GoogleLogin
+                            onSuccess={credentialResponse => {
+                                console.log(credentialResponse);
+                            }}
+                            onError={() => {
+                                console.log('Login Failed');
+                            }}
+                            /> */}
+
 						</div>
 					</main>
 				</div>

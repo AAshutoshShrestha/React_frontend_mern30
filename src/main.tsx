@@ -4,11 +4,16 @@ import "./assets/css/main.css"
 
 
 import { RouterConfig } from './config/router.config';
+import { Provider } from 'react-redux';
+import store from './config/store.config';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const rootElem = ReactDOM.createRoot(document.getElementById('root') as any);
 rootElem.render(
   // <React.StrictMode>
-    <RouterConfig/>
+    <Provider store={store}>
+
+      <RouterConfig/>
+    </Provider>
   // </React.StrictMode>
 )

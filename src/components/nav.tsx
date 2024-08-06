@@ -1,6 +1,5 @@
-import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import AuthContext from "../context/auth.content";
+import { useGetLoggedInUserQuery } from "../pages/auth/authApi";
 
 
 const LinkComponent = ({ text, icon, link }: { text: string, icon?: string, link: string }) => {
@@ -15,7 +14,20 @@ const LinkComponent = ({ text, icon, link }: { text: string, icon?: string, link
 }
 
 const NavBar = () => {
-	const auth: any = useContext(AuthContext)
+	// const auth: any = useContext(AuthContext)
+    const {data, isLoading, isError} = useGetLoggedInUserQuery();
+
+	
+	if(isLoading) return <>Loading</>
+    // if(isError) return <>Error </>
+	
+    let auth = data?.result;
+	console.log(auth);
+
+	// const auth = useSelector((root:any) => {
+	// 	return root.auth.LoggedInUser || null
+		
+	// })
 	return (
 		<>
 			<header>
@@ -29,9 +41,9 @@ const NavBar = () => {
 						</a>
 						<div className="flex items-center lg:order-2">
 							{
-								auth.LoggedInUser ?
+								auth && auth ?
 									<>
-										<NavLink to="/admin" type="button" className="mr-2 rounded-lg bg-amber-700 px-4 py-2 text-sm font-medium text-white hover:bg-amber-800 focus:outline-none focus:ring-4 focus:ring-amber-300 lg:px-5 lg:py-2.5 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800">{auth.LoggedInUser.role}</NavLink>
+										<NavLink to="/admin" type="button" className="mr-2 rounded-lg bg-amber-700 px-4 py-2 text-sm font-medium text-white hover:bg-amber-800 focus:outline-none focus:ring-4 focus:ring-amber-300 lg:px-5 lg:py-2.5 dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800">{auth.role}</NavLink>
 									</> :
 									<>
 										<NavLink to="/sign-in" type="button" className="mr-2 rounded-lg px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-300 lg:px-5 lg:py-2.5 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-800">Sign in</NavLink>

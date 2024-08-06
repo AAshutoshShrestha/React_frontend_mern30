@@ -1,59 +1,54 @@
 // import { useEffect, useState } from "react"
 
+import { useEffect, useState } from "react";
+import bannerSvc from "../../pages/banner/banner.service";
+import LoadingSpinner from "../common/loading/index.component";
+import { Carousel } from "flowbite-react";
+
 
 export const HomeBanner = () => {
 
-	// const [Banner,setBanner] = useState([])
-	// const [loading,setLoading] = useState(true)
+	const [Banner, setBanner] = useState([])
+	let [loading, setLoading] = useState(true)
+	const getBanners = async () => {
+		try {
+			const response: any = await bannerSvc.getRequest("/banner/list-home");
+			setBanner(response.result);
+			setLoading(false)
+		} catch (exception) {
+			// handling 
+		} finally {
+			// 
+		}
+	}
 
-	// const getBanners = async () => {
+	useEffect(() => {
+		getBanners();
+	}, [])
 
-	// }
-	
-	// useEffect(() => {
-	// 	return() => {
-	// 		getBanners();
-	// 		setBanner(responce.data.result)
-			
-	// 	}
-	// },[])
-	// useEffect(() => {
-	// 	return() => {
-	// 		console.log("");
-	// 		setLoading(false)
-			
-	// 	}
-	// },[loading])
 	return (
 		<>
-		{/* loading ? <>loading.....</> : <> */}
-		{/* loop banner images */}
-			<div className="relative">
+			<div className="h-80 sm:h-64 2xl:h-[550px] ">
+				{
+					loading ? <><LoadingSpinner /></>
+						:
+						<>
+							<Carousel slideInterval={5000}>
+								{
+									Banner && Banner.map((BannerImage: any, index: number) => (
+										<a href={BannerImage.link} target="_banner" key={index}>
+											<img src={import.meta.env.VITE_IMAGE_URL + '/banner/' + BannerImage.image} alt="..." />
+										</a>
+									))
+								}
+							</Carousel>
 
-				<div className="hs-carousel relative overflow-hidden w-full min-h-64">
-					<div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
-					<div className="hs-carousel-slide">
-						1
-					</div>
-					<div className="hs-carousel-slide">
-						2
-					</div>
-					<div className="hs-carousel-slide">
-						3
-					</div>
-					</div>
-				</div>
 
-				<button type="button" className="hs-carousel-prev">
-					<span aria-hidden="true">«</span>
-					<span className="sr-only">Previous</span>
-				</button>
-				<button type="button" className="hs-carousel-next">
-					<span className="sr-only">Next</span>
-					<span aria-hidden="true">»</span>
-				</button>
+						</>
+				}
 			</div>
-			{/* </> */}
+
+
 
 		</>
 	)

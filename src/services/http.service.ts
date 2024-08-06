@@ -9,15 +9,15 @@ abstract class HttpService {
 		// updated auth code for login and logout
 
 		if (config && config.Auth) {
-			let token = localStorage.getItem("_at") || null 
+			let token = localStorage.getItem("_at") || null;
 			if (!token) {
-				toast.error("Login First")
+				toast.error("Login First");
 				// redirect
-				document.location.href = "/sign-in"
+				document.location.href = "/sign-in";
 			}
 			this.headers = {
 				...this.headers,
-				Authorization: "Bearer "+token
+				Authorization: "Bearer " + token,
 			};
 		}
 
@@ -45,6 +45,7 @@ abstract class HttpService {
 			this.getHeaders(config);
 			const response = await axiosInstance.post(url, data, {
 				headers: { ...this.headers },
+				params: {...this.params}
 			});
 			return response;
 		} catch (exception) {
@@ -67,17 +68,53 @@ abstract class HttpService {
 		}
 	};
 
-	// putRequest = async(url: string, data: unknown = {}, config: unknown = null):Promise<any> => {
-	// 	// complete the code
-	// };
+	putRequest = async (
+		url: string,
+		data: unknown = {},
+		config: unknown = null
+	): Promise<any> => {
+		try {
+			this.getHeaders(config);
+			const response = await axiosInstance.put(url, data, {
+				headers: { ...this.headers },
+			});
+			return response;
+		} catch (exception) {
+			console.log("putRequestException", exception);
+			throw exception;
+		}
+	};
 
-	// patchRequest = async(url: string, data: unknown = {}, config: unknown = null):Promise<any> => {
-	// 	// complete the code
-	// };
+	patchRequest = async (
+		url: string,
+		data: unknown = {},
+		config: unknown = null
+	): Promise<any> => {
+		try {
+			this.getHeaders(config);
+			const response = await axiosInstance.patch(url, data, {
+				headers: { ...this.headers },
+			});
+			return response;
+		} catch (exception) {
+			console.log("PatchRequestException", exception);
+			throw exception;
+		}
+	};
 
-	// deleteRequest = async(url: string, config: unknown = null):Promise<any> => {
-	// 	// complete the code
-	// };
+	deleteRequest = async (url: string, config: unknown = null): Promise<any> => {
+		try {
+			this.getHeaders(config);
+			const response = await axiosInstance.delete(url, {
+				headers: { ...this.headers },
+				params: { ...this.params },
+			});
+			return response;
+		} catch (error) {
+			console.log("DeleteRequestException", error);
+			throw error;
+		}
+	};
 }
 
 export default HttpService;

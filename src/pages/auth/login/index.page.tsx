@@ -1,4 +1,3 @@
-// import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Heading1 } from "../../../components/common/typography/typography.component";
 
@@ -11,8 +10,18 @@ import authSvc from "../auth.service";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import AuthContext from "../../../context/auth.content";
+import { useDispatch } from "react-redux";
+import { setLoggedInUser } from "../../../reducer/auth.reducer";
+import { useLoginMutation } from "../authApi";
 
 const LoginPage = () => {
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+
+	const [login,{isLoading}] = useLoginMutation()
+	
+	const Auth:any = useContext(AuthContext)
+
 	const LoginDTO = authSvc.loginUserDTO();
 	const [loading, setLoading] = useState(false)
 
@@ -20,34 +29,28 @@ const LoginPage = () => {
 		resolver: yupResolver(LoginDTO)
 	})
 
-	const Auth:any = useContext(AuthContext)
 
-	const navigate = useNavigate()
-
+	console.log(isLoading);
+	
 	const submitEvent = async (data: any) => {
-		setLoading(true)
 		try {
-			const responce = await authSvc.postRequest("/auth/login", data)
+			const responce = await login(data).unwrap();
+			// const responce = await authSvc.postRequest("/auth/login", data)
 
 			localStorage.setItem("_at",responce.result.token.accessToken)
 			localStorage.setItem("_rt",responce.result.token.refreshToken)
 			toast.success("Welcome! you have been Succesfully logged in.")
 			
 			Auth.setLoggedInUser(responce.result.userDetail)
+			dispatch(setLoggedInUser(responce.result.userDetail))
 
 			navigate('/')
+			
+			
 		} catch (exception: any) {
-			// handel error defination
-			// if (+exception.status === 422) {
-			// 	Object.keys(exception.data.result).map((field: any) => {
-			// 		setError(field, { message: exception.data.result[field] })
-			// 	})
-			// }
-			toast.error(exception.data.message)
-		} finally {
-			setLoading(false)
+			console.error(exception)
+            toast.error("Error while logging in your account!!")
 		}
-
 	}
 
 	useEffect(()=>{
@@ -57,7 +60,7 @@ const LoginPage = () => {
 		}
 	},[Auth])
 
-	console.log(errors);
+	// console.log(errors);
 
 
 	return (

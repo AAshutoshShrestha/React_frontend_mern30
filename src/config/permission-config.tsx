@@ -12,11 +12,13 @@ const AllowUser = ({ allowuser, children }: { allowuser: string, children: any }
 		if (auth.LoggedInUser) {
 			if (allowuser === auth.LoggedInUser.role) {
 				setAccess(true);
-			} else {
-				setAccess(false)
-			}
-			setLoading(false)
-		}
+            } else {
+                setAccess(false)
+            }
+            setLoading(false)
+        } else {
+            setLoading(false)
+        }
 
 	}, [auth])
 

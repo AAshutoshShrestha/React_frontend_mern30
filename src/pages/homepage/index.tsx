@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { ClientSection } from "../../components/sections/logo.component";
 import { OfferSection } from "../../components/offer.component";
 import { HeroSection } from "../../components/sections/hero.component";
@@ -12,13 +12,14 @@ import { SingleProductSection } from "../../components/sections/SingleProduct.co
 
 import productData from '../../../product.json';
 import { AdsSection1 } from "../../components/sections/advertisement.component";
+import { HomeBanner } from "../../components/banner/banner.component";
 const Homepage = () => {
 
 	const products = productData.products.slice(0, 8); // Limiting to first 8 products
 
 	return (
 		<React.Fragment>
-
+			
 			<HeroSection />
 			<ClientSection />
 
@@ -42,6 +43,7 @@ const Homepage = () => {
 			</div>
 
 			<SingleProductSection />
+			<HomeBanner/>
 			<OfferSection />
 
 

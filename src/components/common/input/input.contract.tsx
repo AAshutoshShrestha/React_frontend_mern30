@@ -1,19 +1,40 @@
-// import { BaseSyntheticEvent } from "react";
+import { BaseSyntheticEvent } from "react"
 
 export enum INPUT_TYPE {
-	TEXT = 'text',
-	NUMBER = 'number',
-	PASSWORD = 'password',
-	TEL= 'tel',
-	EMAIL = 'email',
+    TEXT= 'text',
+    NUMBER='number',
+    EMAIL="email",
+    PASSWORD="password",
+    TEL="tel",
+    URL="url"
+}
+export type handleChangeType = (e: BaseSyntheticEvent)=>{}
+
+export interface ITextInputComponent {
+    type?: INPUT_TYPE,
+    name: string, 
+    defaultValue?: string,
+    control: any,
+    msg?:string | undefined | null
 }
 
-// export type handelChangeType = (e:BaseSyntheticEvent) => {}
+export interface IFileInputComponent {
+    name: string, 
+    setValue: any,
+    imageUrl?: string | undefined | null
+    msg?:string | undefined | null,
+}
 
-export interface ITextInputComponent{
-	type ?: string,
-	name : string,
-	defaultValue ?: string,
-	control : unknown,
-	msg?: string | null | undefined,
+export interface SelectOption {
+    label: string, 
+    value: string
+}
+
+export interface ISelectProps {
+    options: Array<SelectOption>,
+    name: string, 
+    control: any, 
+    defaultValue?: string,
+    multiple?: boolean
+    msg?: string | undefined | null, 
 }
